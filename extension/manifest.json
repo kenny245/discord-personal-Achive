@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Personal Archive · 只读采集伴侣",
+  "version": "0.1.0",
+  "description": "经用户主动确认后，扫描自己在 Discord 中发送的消息并传给本机知识库。不包含删除操作。",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://discord.com/*", "http://127.0.0.1:8765/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "个人消息归档", "default_popup": "popup.html" }
+}

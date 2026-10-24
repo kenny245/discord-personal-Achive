@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="popup.css"><title>只读 Discord 归档</title></head>
+<body>
+  <header><div class="icon">▣</div><div><h1>Personal Archive</h1><small>READ-ONLY DISCORD CONNECTOR</small></div><span class="badge">只读</span></header>
+  <main>
+    <div class="warning"><strong>普通账号自动化存在封号风险。</strong>此插件只读取你的消息并同步到 127.0.0.1；不删除消息、不会把 Discord Token 传给本地服务。请主动确认后使用。</div>
+    <label>本地 GUI 配对码<input id="pairing" type="password" autocomplete="off" placeholder="从本地知识库的数据导入页复制"></label>
+    <div class="two">
+      <label>服务器 ID（私信填 @me）<input id="guild" spellcheck="false" placeholder="服务器 ID"></label>
+      <label>频道 / 帖子 ID<input id="channel" spellcheck="false" placeholder="留空搜索全服"></label>
+    </div>
+    <button id="fill" class="secondary">从当前 Discord 页面填入范围</button>
+    <div class="two">
+      <label>起始时间<input id="after" type="datetime-local"></label>
+      <label>结束时间<input id="before" type="datetime-local"></label>
+    </div>
+    <label>本轮最多采集条数<input id="limit" type="number" min="1" max="20000" value="2000"></label>
+    <label class="confirm"><input id="risk" type="checkbox"><span>我了解 self-bot 账号风险，并确认仅采集自己发送的消息。</span></label>
+    <div class="buttons"><button id="start" class="primary" disabled>开始只读扫描</button><button id="stop" class="danger" disabled>停止</button></div>
+    <section class="status"><div class="status-title"><strong id="phase">准备就绪</strong><span id="account"></span></div>
+      <p id="message">保持 Discord 网页和此窗口打开。刷新或后台休眠会中止本轮，已经保存的数据可去重。</p>
+      <div class="stats"><span>已扫 <b id="scanned">0</b></span><span>本人 <b id="own">0</b></span><span>新增 <b id="saved">0</b></span></div>
+      <small id="through"></small>
+    </section>
+    <a href="http://127.0.0.1:8765" target="_blank" rel="noopener">打开本地知识库 ↗</a>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

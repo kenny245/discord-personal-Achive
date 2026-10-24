@@ -1,0 +1,32 @@
+name: Tests and frontend build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Build Vue GUI
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+      - name: Python unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Local service integration tests
+        run: python tests/integration_smoke.py
+      - name: Chrome extension simulator
+        run: node tests/test_extension.mjs
